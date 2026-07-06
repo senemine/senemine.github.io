@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emine Şen | Portfolyo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        accent: {
+                            500: '#8b5cf6', // Violet
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #020617; /* slate-950 */
+            color: #cbd5e1; /* slate-300 */
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-4px);
+        }
+        
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-xl bg-slate-950/70 border-b border-white/5" id="navbar">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-white font-bold text-2xl tracking-tighter">Emine<span class="text-brand-500">.</span></a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#yetenekler" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Yetenekler</a>
+                        <a href="#proje" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Proje</a>
+                        <a href="#deneyim" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Deneyim & Eğitim</a>
+                        <a href="#sertifikalar" class="text-slate-300 hover:text-white text-sm font-medium transition-colors">Sertifikalar</a>
+                        <a href="#iletisim" class="bg-white hover:bg-slate-200 text-slate-900 px-5 py-2.5 rounded-full text-sm font-semibold transition-all">İletişim</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#yetenekler" class="block px-3 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Yetenekler</a>
+                <a href="#proje" class="block px-3 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Proje</a>
+                <a href="#deneyim" class="block px-3 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Deneyim & Eğitim</a>
+                <a href="#sertifikalar" class="block px-3 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Sertifikalar</a>
+                <a href="#iletisim" class="block px-3 py-3 mt-4 text-center rounded-lg bg-brand-500 text-white font-medium">İletişime Geç</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hakkimda" class="pt-40 pb-20 md:pt-52 md:pb-32 px-4 relative overflow-hidden min-h-screen flex items-center">
+        <!-- Background Blobs -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-600 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob"></div>
+        <div class="absolute top-20 right-1/4 w-96 h-96 bg-accent-500 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-5xl mx-auto w-full flex flex-col items-center text-center relative z-10">
+            <div class="inline-block mb-6 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md fade-in-up">
+                <span class="text-sm font-medium text-brand-400">Yönetim Bilişim Sistemleri Uzmanı</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white mb-6 tracking-tight fade-in-up" style="transition-delay: 100ms;">
+                Merhaba, Ben <br class="hidden md:block" />
+                <span class="gradient-text">Emine Şen</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed fade-in-up" style="transition-delay: 200ms;">
+                Yazılım geliştirme, yapay zekâ ve veri analizi üzerine odaklanan, yenilikçi projelere imza atmayı hedefleyen tutkulu bir sistem geliştiricisiyim.
+            </p>
+            
+            <!-- Quick Contact Badges -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in-up" style="transition-delay: 300ms;">
+                <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-brand-500/50 transition-colors cursor-pointer group" onclick="copyToClipboard('07senemine@gmail.com')">
+                    <i class="fas fa-envelope text-brand-500 group-hover:scale-110 transition-transform"></i> 
+                    <span class="text-sm text-slate-300">07senemine@gmail.com</span>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-brand-500/50 transition-colors cursor-pointer group" onclick="copyToClipboard('+905013437135')">
+                    <i class="fas fa-phone text-brand-500 group-hover:scale-110 transition-transform"></i> 
+                    <span class="text-sm text-slate-300">+90 501 343 71 35</span>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900/80 border border-slate-800">
+                    <i class="fas fa-map-marker-alt text-brand-500"></i> 
+                    <span class="text-sm text-slate-300">Antalya / Alanya</span>
+                </div>
+            </div>
+
+            <div class="fade-in-up" style="transition-delay: 400ms;">
+                <a href="#proje" class="w-14 h-14 rounded-full border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:border-brand-500 hover:bg-brand-500/10 transition-all animate-bounce mt-10">
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="yetenekler" class="py-24 bg-slate-900/20 relative">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-12 fade-in-up">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Teknik Beceriler</h2>
+                    <p class="text-slate-400">Geliştirme sürecinde kullandığım başlıca teknolojiler.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <div class="glass-card p-8 rounded-2xl text-center hover-glow transition-all duration-300 fade-in-up">
+                    <div class="w-16 h-16 mx-auto bg-blue-500/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fab fa-python text-4xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-lg">Python</h3>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center hover-glow transition-all duration-300 fade-in-up" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 mx-auto bg-purple-500/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fab fa-windows text-4xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-lg">C#</h3>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center hover-glow transition-all duration-300 fade-in-up" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 mx-auto bg-yellow-500/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fab fa-js text-4xl text-yellow-400"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-lg">JavaScript</h3>
+                </div>
+                <div class="glass-card p-8 rounded-2xl text-center hover-glow transition-all duration-300 fade-in-up" style="transition-delay: 300ms;">
+                    <div class="w-16 h-16 mx-auto bg-emerald-500/10 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-file-excel text-4xl text-emerald-400"></i>
+                    </div>
+                    <h3 class="text-white font-semibold text-lg">Ofis Uyg.</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proje" class="py-24 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-12 fade-in-up">
+                <span class="text-accent-500 font-bold tracking-wider text-sm uppercase">Öne Çıkan Proje</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mt-2">Lisans Bitirme Projesi</h2>
+            </div>
+
+            <div class="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden group fade-in-up border-slate-700/50">
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 group-hover:bg-brand-500/20 transition-colors duration-700"></div>
+                
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl md:text-4xl font-bold text-white mb-6 leading-tight">Yapay Zekâ Destekli <br><span class="text-brand-400">Üniversite Asistanı</span> (Chatbot)</h3>
+                        <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                            Öğrenci ve personelin bilgiye anında ulaşmasını sağlayan, Doğal Dil İşleme ve RAG mimarisi ile güçlendirilmiş akıllı asistan sistemi.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="px-3 py-1 bg-slate-800 rounded-md text-xs font-medium text-brand-300 border border-brand-500/20">API Entegrasyonu</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-md text-xs font-medium text-brand-300 border border-brand-500/20">OpenAI</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-md text-xs font-medium text-brand-300 border border-brand-500/20">ChromaDB</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-md text-xs font-medium text-brand-300 border border-brand-500/20">RAG</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-md text-xs font-medium text-brand-300 border border-brand-500/20">NLP</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-slate-900/50 p-6 rounded-2xl border border-white/5">
+                            <div class="flex items-center gap-4 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h4 class="text-white font-semibold text-lg">Veri Toplama ve İşleme</h4>
+                            </div>
+                            <p class="text-slate-400 text-sm">Farklı kaynaklardan (API, PDF, Web) otomatik veri çekimi gerçekleştiren sağlam bir altyapı.</p>
+                        </div>
+
+                        <div class="bg-slate-900/50 p-6 rounded-2xl border border-white/5">
+                            <div class="flex items-center gap-4 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-accent-500/20 flex items-center justify-center text-accent-400">
+                                    <i class="fas fa-project-diagram"></i>
+                                </div>
+                                <h4 class="text-white font-semibold text-lg">Vektör Tabanlı Arama</h4>
+                            </div>
+                            <p class="text-slate-400 text-sm">Verilerin OpenAI ile embedding'e dönüştürülüp ChromaDB'ye kaydedilmesiyle kurulan semantik arama altyapısı.</p>
+                        </div>
+
+                        <div class="bg-slate-900/50 p-6 rounded-2xl border border-white/5">
+                            <div class="flex items-center gap-4 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h4 class="text-white font-semibold text-lg">Niyet Analizi</h4>
+                            </div>
+                            <p class="text-slate-400 text-sm">Kullanıcı isteklerinin analiz edilerek doğru yönlendirme ve içerik eşleştirme süreçlerinin optimizasyonu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="deneyim" class="py-24 bg-slate-900/20 relative">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16">
+            
+            <!-- Education -->
+            <div>
+                <div class="mb-12 fade-in-up">
+                    <h2 class="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                        <i class="fas fa-graduation-cap text-brand-500"></i> Eğitim
+                    </h2>
+                </div>
+
+                <div class="relative border-l border-slate-700 ml-3 fade-in-up">
+                    <div class="mb-10 ml-8 relative">
+                        <span class="absolute flex items-center justify-center w-6 h-6 bg-brand-500 rounded-full -left-[45px] ring-4 ring-slate-950">
+                            <i class="fas fa-check text-white text-xs"></i>
+                        </span>
+                        <div class="glass-card p-6 rounded-2xl hover-glow transition-all">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="flex items-center mb-1 text-lg font-bold text-white">Pamukkale Üniversitesi</h3>
+                                <span class="bg-slate-800 text-brand-300 text-xs font-medium px-2.5 py-1 rounded border border-slate-700">2021 - 2025</span>
+                            </div>
+                            <h4 class="text-md font-medium text-slate-300 mb-2">Yönetim Bilişim Sistemleri (Lisans)</h4>
+                            <p class="text-slate-400 text-sm">Yazılım süreçleri, veri analitiği ve yönetim bilimleri üzerine kapsamlı akademik eğitim.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div>
+                <div class="mb-12 fade-in-up" style="transition-delay: 100ms;">
+                    <h2 class="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+                        <i class="fas fa-briefcase text-accent-500"></i> İş Deneyimi
+                    </h2>
+                </div>
+
+                <div class="relative border-l border-slate-700 ml-3">
+                    
+                    <div class="mb-10 ml-8 relative fade-in-up" style="transition-delay: 200ms;">
+                        <span class="absolute flex items-center justify-center w-6 h-6 bg-accent-500 rounded-full -left-[45px] ring-4 ring-slate-950">
+                            <i class="fas fa-code text-white text-xs"></i>
+                        </span>
+                        <div class="glass-card p-6 rounded-2xl hover-glow transition-all">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="flex items-center mb-1 text-lg font-bold text-white">Yazılım Stajyeri</h3>
+                                <span class="bg-slate-800 text-accent-300 text-xs font-medium px-2.5 py-1 rounded border border-slate-700">07/2025 - 08/2025</span>
+                            </div>
+                            <h4 class="text-md font-medium text-slate-300 mb-2">Pamukkale Üniversitesi Bilgi İşlem D.B.</h4>
+                            <p class="text-slate-400 text-sm">Kurumsal yazılım geliştirme süreçlerine katkı sağlama ve bilgi işlem projelerinde aktif rol alma.</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-10 ml-8 relative fade-in-up" style="transition-delay: 300ms;">
+                        <span class="absolute flex items-center justify-center w-6 h-6 bg-slate-600 rounded-full -left-[45px] ring-4 ring-slate-950">
+                            <i class="fas fa-building text-white text-xs"></i>
+                        </span>
+                        <div class="glass-card p-6 rounded-2xl hover-glow transition-all">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="flex items-center mb-1 text-lg font-bold text-white">Stajyer</h3>
+                                <span class="bg-slate-800 text-slate-300 text-xs font-medium px-2.5 py-1 rounded border border-slate-700">08/2024 - 09/2024</span>
+                            </div>
+                            <h4 class="text-md font-medium text-slate-300">Vakıfbank</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sertifikalar" class="py-24 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">Eğitim ve Sertifikalar</h2>
+                <p class="text-slate-400">Sürekli öğrenme ve gelişim yolculuğum.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Cert 1 -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center gap-4 hover:border-brand-500/50 transition-colors fade-in-up group">
+                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 text-brand-400 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-python text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium leading-tight mb-1">Python 201</h4>
+                        <span class="text-xs text-slate-500">Ekim 2025</span>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center gap-4 hover:border-brand-500/50 transition-colors fade-in-up group" style="transition-delay: 50ms;">
+                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 text-brand-400 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-python text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium leading-tight mb-1">Python 101</h4>
+                        <span class="text-xs text-slate-500">Mart 2024</span>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center gap-4 hover:border-brand-500/50 transition-colors fade-in-up group" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 text-brand-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-sitemap text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium leading-tight mb-1">Algoritmaya Giriş</h4>
+                        <span class="text-xs text-slate-500">Eylül 2022</span>
+                    </div>
+                </div>
+
+                <!-- Cert 4 -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center gap-4 hover:border-brand-500/50 transition-colors fade-in-up group" style="transition-delay: 150ms;">
+                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 text-brand-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-laptop text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium leading-tight mb-1">Dijital Okuryazarlık 101</h4>
+                        <span class="text-xs text-slate-500">Haziran 2022</span>
+                    </div>
+                </div>
+
+                <!-- Cert 5 -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center gap-4 hover:border-brand-500/50 transition-colors fade-in-up group" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 text-brand-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shield-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium leading-tight mb-1">Siber Güvenlik 101</h4>
+                        <span class="text-xs text-slate-500">Mayıs 2022</span>
+                    </div>
+                </div>
+
+                <!-- Cert 6 -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center gap-4 hover:border-brand-500/50 transition-colors fade-in-up group" style="transition-delay: 250ms;">
+                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 text-brand-400 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-windows text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium leading-tight mb-1">C# ile Algoritma 201</h4>
+                        <span class="text-xs text-slate-500">Nisan 2022</span>
+                    </div>
+                </div>
+
+                <!-- Cert 7 -->
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center gap-4 hover:border-brand-500/50 transition-colors fade-in-up group" style="transition-delay: 300ms;">
+                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center flex-shrink-0 text-brand-400 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-windows text-xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-medium leading-tight mb-1">C# ile Algoritma 101</h4>
+                        <span class="text-xs text-slate-500">Mart 2022</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="iletisim" class="bg-slate-950 pt-20 pb-10 border-t border-white/5 relative overflow-hidden">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-brand-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">Birlikte Çalışalım</h2>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-12">
+                <a href="mailto:07senemine@gmail.com" class="flex items-center gap-3 px-6 py-3 rounded-full bg-slate-900 border border-slate-800 hover:bg-brand-500 hover:border-brand-500 text-slate-300 hover:text-white transition-all w-full md:w-auto justify-center">
+                    <i class="fas fa-envelope"></i>
+                    <span class="font-medium">07senemine@gmail.com</span>
+                </a>
+                <a href="tel:+905013437135" class="flex items-center gap-3 px-6 py-3 rounded-full bg-slate-900 border border-slate-800 hover:bg-brand-500 hover:border-brand-500 text-slate-300 hover:text-white transition-all w-full md:w-auto justify-center">
+                    <i class="fas fa-phone"></i>
+                    <span class="font-medium">+90 501 343 71 35</span>
+                </a>
+            </div>
+            
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent mb-10"></div>
+            
+            <p class="text-slate-500 text-sm">
+                &copy; <span id="year"></span> Emine Şen. Tüm hakları saklıdır.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Messages / Toasts container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2"></div>
+
+    <script>
+        // Set year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const navbar = document.getElementById('navbar');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            if(!menu.classList.contains('hidden')) {
+                navbar.classList.add('bg-slate-950');
+            } else if (window.scrollY <= 10) {
+                navbar.classList.remove('bg-slate-950');
+            }
+        });
+
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                navbar.classList.add('bg-slate-950/90', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-slate-950/90', 'shadow-lg');
+            }
+        });
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed'; // Avoid scrolling to bottom
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast('Kopyalandı: ' + text);
+            } catch (err) {
+                showToast('Kopyalama başarısız oldu.');
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            toast.className = 'bg-slate-800 border border-slate-700 text-white px-5 py-3 rounded-lg shadow-2xl flex items-center gap-3 transform transition-all duration-300 translate-y-10 opacity-0';
+            toast.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
+                    <i class="fas fa-check"></i>
+                </div>
+                <span class="text-sm font-medium">${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            });
+            
+            // Remove toast
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => container.removeChild(toast), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
