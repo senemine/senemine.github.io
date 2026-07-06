@@ -170,10 +170,13 @@
                     <span class="text-xs font-semibold tracking-wide uppercase text-brand-400">Yönetim Bilişim Sistemleri Mezunu & Geliştirici</span>
                 </div>
                 
-
+                <!-- Updated Header: Emine Şen -->
+                <h1 class="text-5xl sm:text-7xl md:text-8xl font-extrabold text-white mb-6 tracking-tight leading-none fade-in-up" style="transition-delay: 100ms;">
+                    Emine <span class="gradient-text">Şen</span>
+                </h1>
                 
                 <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-light fade-in-up" style="transition-delay: 200ms;">
-                    Merhaba, ben <span class="text-white font-semibold">Emine Şen</span>. Pamukkale Üniversitesi Yönetim Bilişim Sistemleri (2025) mezunuyum. 
+                    Pamukkale Üniversitesi Yönetim Bilişim Sistemleri (2025) mezunuyum. 
                     Veri analitiği, modern yazılım mimarileri ve özellikle <span class="text-brand-400 font-medium">yapay zekâ ve doğal dil işleme (NLP)</span> odaklı akıllı sistemler üzerinde çalışıyorum.
                 </p>
                 
@@ -218,7 +221,7 @@
                 <p class="text-slate-400 mt-4 max-w-xl mx-auto">Geliştirme süreçlerinde aktif kullandığım programlama dilleri, veritabanı teknolojileri ve araçlar.</p>
             </div>
 
-            <!-- Interative Skill Grid -->
+            <!-- Interactive Skill Grid (No percentages) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Skill Card: Python -->
                 <div class="glass-card p-8 rounded-2xl text-left hover-glow transition-all duration-300 fade-in-up relative overflow-hidden group">
@@ -275,7 +278,7 @@
                 <p class="text-slate-400 mt-3 max-w-xl mx-auto">Üniversite süreçlerini yapay zeka ile entegre ederek verimlilik katan RAG tabanlı akıllı asistan.</p>
             </div>
 
-            <!-- Single Column Premium Showcase Layout (Assistant simulator removed) -->
+            <!-- Single Column Premium Showcase Layout -->
             <div class="glass-card p-8 md:p-12 rounded-3xl border border-slate-800 fade-in-up">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                     <div>
@@ -293,7 +296,7 @@
                     </div>
                 </div>
 
-                <p class="text-slate-300 leading-relaxed text-sm md:text-base mb-8">
+                <p class="text-slate-300 leading-relaxed text-sm md:text-base mb-8 font-light">
                     Öğrenci ve akademisyenlerin kampüs süreçleri, ders detayları ve idari prosedürler hakkında anında, doğru yanıtlar alabilmesini sağlayan akıllı asistan sistemi. Farklı veri kaynaklarından (API, PDF, web) veri çekimi gerçekleştirerek temiz bir asistan veri tabanı oluşturduk.
                 </p>
 
@@ -565,6 +568,35 @@
         // Set dynamic current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
+        // Particle Class (Declared at the top to prevent hoisting errors)
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
         // Mobile Menu Logic
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
@@ -640,34 +672,6 @@
                 let color = 'rgba(139, 92, 246, 0.4)'; // soft purple
 
                 particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-            }
-        }
-
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x;
-                this.y = y;
-                this.directionX = directionX;
-                this.directionY = directionY;
-                this.size = size;
-                this.color = color;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-            update() {
-                if (this.x > canvas.width || this.x < 0) {
-                    this.directionX = -this.directionX;
-                }
-                if (this.y > canvas.height || this.y < 0) {
-                    this.directionY = -this.directionY;
-                }
-                this.x += this.directionX;
-                this.y += this.directionY;
-                this.draw();
             }
         }
 
