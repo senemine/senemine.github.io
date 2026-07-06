@@ -1,1 +1,0 @@
-# senemine.github.io
